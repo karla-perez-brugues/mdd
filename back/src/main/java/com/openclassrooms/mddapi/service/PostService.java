@@ -49,13 +49,6 @@ public class PostService {
         return postRepository.findById(id).orElseThrow();
     }
 
-    public Comment addComment(Long postId, CommentDto commentDto, Principal principal) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        User user = userRepository.findByEmail(principal.getName()).orElse(null);
-
-        return commentService.create(commentDto, post, user);
-    }
-
     public List<Post> getUserFeed(Principal principal) {
         User user = userRepository.findByEmail(principal.getName()).orElseThrow();
         List<Topic> subscribedTopics = user.getTopics();
