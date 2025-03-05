@@ -11,9 +11,6 @@ public class CommentDto {
     @NotNull
     private String content;
 
-    @NotNull
-    private Long postId;
-
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -34,15 +31,6 @@ public class CommentDto {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    @JsonProperty("post_id")
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
     }
 
     @JsonProperty("created_at")
