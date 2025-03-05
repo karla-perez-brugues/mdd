@@ -42,7 +42,7 @@ public class TopicController { // TODO: add try catches
 
     @GetMapping("/user")
     public ResponseEntity<List<TopicDto>> findSubscribedTopicsByUser(Principal principal) {
-        List<Topic> topicList = topicService.findSubscribedTopicsByUser(principal);
+        List<Topic> topicList = topicService.findSubscribedTopicsByUser(principal.getName());
         List<TopicDto> topicDtoList = topicList.stream().map(t -> modelMapper.map(t, TopicDto.class)).toList();
 
         return ResponseEntity.ok(topicDtoList);
@@ -50,14 +50,14 @@ public class TopicController { // TODO: add try catches
 
     @GetMapping("/{id}/subscribe")
     public ResponseEntity<?> subscribe(@PathVariable("id") String id, Principal principal) {
-        userService.addSubscription(Long.valueOf(id), principal);
+        userService.addSubscription(Long.valueOf(id), principal.getName());
 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}/unsubscribe")
     public ResponseEntity<?> unsubscribe(@PathVariable("id") String id, Principal principal) {
-        userService.deleteSubscription(Long.valueOf(id), principal);
+        userService.deleteSubscription(Long.valueOf(id), principal.getName());
 
         return ResponseEntity.ok().build();
     }

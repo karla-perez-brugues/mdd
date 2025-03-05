@@ -7,7 +7,6 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -27,8 +26,10 @@ public class TopicService {
         return topicRepository.findById(id).orElse(null);
     }
 
-    public List<Topic> findSubscribedTopicsByUser(Principal principal) {
-        User user = userRepository.findByEmail(principal.getName()).orElse(null);
+    public List<Topic> findSubscribedTopicsByUser(String username) {
+        System.out.println(username);
+
+        User user = userRepository.findByUsername(username).orElse(null);
 
         // TODO: throw error
         assert user != null;

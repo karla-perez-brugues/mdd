@@ -23,7 +23,7 @@ public class PostController {
 
     @GetMapping("")
     public ResponseEntity<?> getAllPosts(Principal principal) {
-        List<Post> postList = postService.getUserFeed(principal);
+        List<Post> postList = postService.getUserFeed(principal.getName());
         List<PostDto> postDtoList = postList.stream().map(post -> modelMapper.map(post, PostDto.class)).toList();
 
         return ResponseEntity.ok(postDtoList);
@@ -39,7 +39,7 @@ public class PostController {
 
     @PostMapping("")
     public ResponseEntity<?> createPost(@RequestBody PostDto postDto, Principal principal) {
-        postService.createPost(postDto, principal);
+        postService.createPost(postDto, principal.getName());
 
         return ResponseEntity.ok().build();
     }

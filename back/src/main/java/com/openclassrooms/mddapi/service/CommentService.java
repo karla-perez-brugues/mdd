@@ -11,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -29,9 +28,9 @@ public class CommentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void create(CommentDto commentDto, Long postId, Principal principal) {
+    public void create(CommentDto commentDto, Long postId, String username) {
         Post post = postRepository.findById(postId).orElseThrow();
-        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
+        User user = userRepository.findByUsername(username).orElseThrow();
 
         Comment comment = modelMapper.map(commentDto, Comment.class);
         comment.setPost(post);

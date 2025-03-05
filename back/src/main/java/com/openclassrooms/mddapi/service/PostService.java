@@ -1,8 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
-import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.dto.PostDto;
-import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -13,7 +11,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -29,13 +26,10 @@ public class PostService {
     private TopicRepository topicRepository;
 
     @Autowired
-    private CommentService commentService;
-
-    @Autowired
     private ModelMapper modelMapper;
 
-    public void createPost(PostDto postDto, Principal principal) {
-        User author = userRepository.findByEmail(principal.getName()).orElseThrow();
+    public void createPost(PostDto postDto, String username) {
+        User author = userRepository.findByUsername(username).orElseThrow();
         Topic topic = topicRepository.findById(postDto.getTopicId()).orElseThrow();
 
         Post post = modelMapper.map(postDto, Post.class);
@@ -49,8 +43,8 @@ public class PostService {
         return postRepository.findById(id).orElseThrow();
     }
 
-    public List<Post> getUserFeed(Principal principal) {
-        User user = userRepository.findByEmail(principal.getName()).orElseThrow();
+    public List<Post> getUserFeed(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow();
         List<Topic> subscribedTopics = user.getTopics();
         List<Post> posts = new ArrayList<>();
 

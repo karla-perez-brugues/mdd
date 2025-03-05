@@ -7,8 +7,6 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
-
 @Service
 public class UserService {
     @Autowired
@@ -25,9 +23,9 @@ public class UserService {
         return userRepository.findByEmail(email).orElse(null);
     }
 
-    public void addSubscription(Long topicId, Principal principal) {
+    public void addSubscription(Long topicId, String username) {
         Topic topic = topicRepository.findById(topicId).orElse(null);
-        User user = userRepository.findByEmail(principal.getName()).orElse(null);
+        User user = userRepository.findByUsername(username).orElse(null);
 
         // TODO: if null throw error
         assert user != null;
@@ -41,9 +39,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteSubscription(Long topicId, Principal principal) {
+    public void deleteSubscription(Long topicId, String username) {
         Topic topic = topicRepository.findById(topicId).orElse(null);
-        User user = userRepository.findByEmail(principal.getName()).orElse(null);
+        User user = userRepository.findByUsername(username).orElse(null);
 
         // TODO: if null throw error
         assert user != null;

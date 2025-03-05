@@ -32,7 +32,7 @@ public class CommentController {
 
     @PostMapping("")
     public ResponseEntity<MessageResponse> create(@PathVariable("id") String postId, @RequestBody CommentDto commentDto, Principal principal) {
-        commentService.create(commentDto, Long.valueOf(postId), principal);
+        commentService.create(commentDto, Long.valueOf(postId), principal.getName());
 
         return ResponseEntity.ok(new MessageResponse("Comment sent successfully !"));
     }
