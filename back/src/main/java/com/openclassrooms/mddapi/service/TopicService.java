@@ -27,8 +27,6 @@ public class TopicService {
     }
 
     public List<Topic> findSubscribedTopicsByUser(String username) {
-        System.out.println(username);
-
         User user = userRepository.findByUsername(username).orElse(null);
 
         // TODO: throw error

@@ -47,14 +47,12 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        User userDetails = (User) authentication.getPrincipal();
-
-        User user = this.userRepository.findByEmail(userDetails.getEmail()).orElse(null);
+        User user = (User) authentication.getPrincipal();
 
         return ResponseEntity.ok(new JwtResponse(
                 jwt,
-                userDetails.getId(),
-                userDetails.getEmail()
+                user.getId(),
+                user.getEmail()
         ));
     }
 
@@ -64,6 +62,12 @@ public class AuthController {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already taken!"));
+        }
+
+        if (userRepository.findByUsername(signUpRequest.getUsername()).isPresent()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
         }
 
         // Create new user's account

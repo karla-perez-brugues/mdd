@@ -48,7 +48,7 @@ public class TopicController { // TODO: add try catches
         return ResponseEntity.ok(topicDtoList);
     }
 
-    @GetMapping("/{id}/subscribe")
+    @PostMapping("/{id}/subscribe")
     public ResponseEntity<?> subscribe(@PathVariable("id") String id, Principal principal) {
         userService.addSubscription(Long.valueOf(id), principal.getName());
 
