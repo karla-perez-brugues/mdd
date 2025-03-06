@@ -11,9 +11,10 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
