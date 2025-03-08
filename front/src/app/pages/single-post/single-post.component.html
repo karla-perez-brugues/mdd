@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container">
+  <div class="back">
+
+  </div>
+
+  <div class="post">
+    <h1>{{ post.title }}</h1>
+    <table class="post-info">
+      <tr>
+        <td>{{ post.createdAt | date: 'dd/MM/YYYY' }}</td>
+        <td>{{ post.author }}</td>
+        <td>{{ topic.title }}</td>
+      </tr>
+    </table>
+    <p>{{ post.content }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="comments">
+    <h2>Commentaires</h2>
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+  </div>
+
+  <div class="comment">
+    <form>
+      <mat-form-field>
+        <textarea matInput placeholder="Écrivez ici votre commentaire"></textarea>
+      </mat-form-field>
+      <button mat-button type="submit">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>
