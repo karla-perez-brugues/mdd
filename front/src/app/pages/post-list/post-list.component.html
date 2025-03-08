@@ -1,7 +1,12 @@
 <app-header></app-header>
 <div class="container">
   <div class="management">
-
+    <button mat-raised-button color="primary" routerLink="/posts/create">Créer un article</button>
+    <button mat-button>
+      <span>Trier par</span>
+      <mat-icon *ngIf="sortByDesc">south</mat-icon>
+      <mat-icon *ngIf="!sortByDesc">north</mat-icon>
+    </button>
   </div>
 
   <div class="posts">

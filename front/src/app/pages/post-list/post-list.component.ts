@@ -35,7 +35,9 @@ export class PostListComponent implements OnInit {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
-  ]
+  ];
+
+  public sortByDesc = true;
 
   constructor() { }
 
