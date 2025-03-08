@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="container">
+  <span>
+    <mat-icon>west</mat-icon>
+  </span>
+
+  <h1>Créer un nouvel article</h1>
+  <form action="">
+    <mat-form-field>
+      <mat-label>Sélectionner un thème</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Titre de l'article</mat-label>
+      <input type="text" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contenu de l'article</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary" routerLink="login">Créer</button>
+  </form>
+</div>
