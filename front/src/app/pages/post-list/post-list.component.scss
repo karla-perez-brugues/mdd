@@ -2,6 +2,13 @@
   padding: 50px;
 }
 
+.management {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
 .posts {
   display: flex;
   flex-wrap: wrap;

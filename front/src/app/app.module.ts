@@ -20,9 +20,11 @@ import {MatDividerModule} from "@angular/material/divider";
 import { CommentComponent } from './components/comment/comment.component';
 import { TopicCardComponent } from './components/topic-card/topic-card.component';
 import { TopicListComponent } from './pages/topic-list/topic-list.component';
+import { PostFormComponent } from './pages/post-form/post-form.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +36,7 @@ import { TopicListComponent } from './pages/topic-list/topic-list.component';
     MatInputModule,
     MatGridListModule,
     MatDividerModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
