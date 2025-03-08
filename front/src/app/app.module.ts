@@ -22,9 +22,10 @@ import { TopicCardComponent } from './components/topic-card/topic-card.component
 import { TopicListComponent } from './pages/topic-list/topic-list.component';
 import { PostFormComponent } from './pages/post-form/post-form.component';
 import {MatSelectModule} from "@angular/material/select";
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent, UserProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
