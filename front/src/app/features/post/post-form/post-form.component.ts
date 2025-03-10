@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Topic} from "../../core/models/topic.model";
+import {Topic} from "../../../core/models/topic.model";
 
 @Component({
   selector: 'app-post-form',

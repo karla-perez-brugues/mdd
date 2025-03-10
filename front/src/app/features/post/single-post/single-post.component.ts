@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from "../../core/models/post.model";
-import {Topic} from "../../core/models/topic.model";
-import {Comment} from "../../core/models/comment.model";
+import {Post} from "../../../core/models/post.model";
+import {Topic} from "../../../core/models/topic.model";
+import {Comment} from "../../../core/models/comment.model";
 
 @Component({
   selector: 'app-single-post',
