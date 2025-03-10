@@ -12,13 +12,13 @@ export class AuthService {
 
   private pathService = '/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   public register(registerRequest: RegisterRequest): Observable<SessionInformation> {
-    return this.http.post<SessionInformation>(`${this.pathService}/register`, registerRequest);
+    return this.httpClient.post<SessionInformation>(`${this.pathService}/register`, registerRequest);
   }
 
   public login(loginRequest: LoginRequest): Observable<SessionInformation> {
-    return this.http.post<SessionInformation>(`${this.pathService}/login`, loginRequest);
+    return this.httpClient.post<SessionInformation>(`${this.pathService}/login`, loginRequest);
   }
 }

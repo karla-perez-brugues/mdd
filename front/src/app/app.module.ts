@@ -23,7 +23,9 @@ import { TopicListComponent } from './features/topic-list/topic-list.component';
 import { PostFormComponent } from './features/post/post-form/post-form.component';
 import {MatSelectModule} from "@angular/material/select";
 import { UserProfileComponent } from './features/user-profile/user-profile.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "../interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent, UserProfileComponent],
@@ -40,8 +42,10 @@ import {FormsModule} from "@angular/forms";
     MatDividerModule,
     MatSelectModule,
     FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

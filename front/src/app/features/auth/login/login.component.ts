@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {AuthService} from "../../../core/services/auth.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {SessionInformation} from "../../../core/interfaces/sessionInformation.interface";
@@ -32,7 +32,7 @@ export class LoginComponent {
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionInformation) => {
         this.sessionService.logIn(response);
-        this.router.navigate(['/sessions']);
+        this.router.navigate(['/posts']);
       },
       error: error => this.onError = true,
     });

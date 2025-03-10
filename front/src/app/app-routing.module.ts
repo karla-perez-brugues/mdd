@@ -8,18 +8,20 @@ import {SinglePostComponent} from "./features/post/single-post/single-post.compo
 import {TopicListComponent} from "./features/topic-list/topic-list.component";
 import {PostFormComponent} from "./features/post/post-form/post-form.component";
 import {UserProfileComponent} from "./features/user-profile/user-profile.component";
+import {UnauthGuard} from "../guards/unauth.guard";
+import {AuthGuard} from "../guards/auth.guard";
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'account', component: UserProfileComponent },
-  { path: 'posts', component: PostListComponent },
-  { path: 'post/:id', component: SinglePostComponent },
-  { path: 'posts/create', component: PostFormComponent },
-  { path: 'topics', component: TopicListComponent },
+  { path: '', component: HomeComponent, canActivate: [UnauthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [UnauthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [UnauthGuard] },
+  { path: 'account', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'posts', component: PostListComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: SinglePostComponent, canActivate: [AuthGuard] },
+  { path: 'posts/create', component: PostFormComponent, canActivate: [AuthGuard] },
+  { path: 'topics', component: TopicListComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

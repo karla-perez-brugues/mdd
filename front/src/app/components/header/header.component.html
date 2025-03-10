@@ -5,12 +5,13 @@
   <a routerLink="">
     <img src="/assets/logo_p6.png" alt="logo" height="50"/>
   </a>
-  <!-- TODO: check if user is logged to show links below -->
   <span class="spacer"></span>
-  <a mat-button routerLink="/logout" color="warn">Se déconnecter</a>
-  <a mat-button routerLink="/posts">Articles</a>
-  <a mat-button routerLink="/topics">Thèmes</a>
-  <a mat-button routerLink="/account">
-    <mat-icon aria-hidden="false" aria-label="account" fontIcon="account_circle"></mat-icon>
-  </a>
+  <div *ngIf="$isLogged() | async">
+    <a mat-button (click)="logout()" color="warn">Se déconnecter</a>
+    <a mat-button routerLink="/posts">Articles</a>
+    <a mat-button routerLink="/topics">Thèmes</a>
+    <a mat-button routerLink="/account">
+      <mat-icon aria-hidden="false" aria-label="account" fontIcon="account_circle"></mat-icon>
+    </a>
+  </div>
 </mat-toolbar>
