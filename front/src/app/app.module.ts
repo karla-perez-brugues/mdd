@@ -23,6 +23,7 @@ import { TopicListComponent } from './features/topic-list/topic-list.component';
 import { PostFormComponent } from './features/post/post-form/post-form.component';
 import {MatSelectModule} from "@angular/material/select";
 import { UserProfileComponent } from './features/user-profile/user-profile.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent, UserProfileComponent],
@@ -38,6 +39,7 @@ import { UserProfileComponent } from './features/user-profile/user-profile.compo
     MatGridListModule,
     MatDividerModule,
     MatSelectModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

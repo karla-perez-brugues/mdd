@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
   <h1>Se connecter</h1>
-  <form action="">
+  <form (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label>E-mail ou nom d'utilisateur</mat-label>
       <input type="email" matInput>
