@@ -4,13 +4,13 @@
 
   </div>
 
-  <div class="post">
+  <div *ngIf="post" class="post">
     <h1>{{ post.title }}</h1>
     <table class="post-info">
       <tr>
         <td>{{ post.createdAt | date: 'dd/MM/YYYY' }}</td>
         <td>{{ post.author }}</td>
-        <td>{{ topic.title }}</td>
+        <td *ngIf="topic">{{ topic.title }}</td>
       </tr>
     </table>
     <p>{{ post.content }}</p>

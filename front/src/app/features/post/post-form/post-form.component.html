@@ -5,24 +5,24 @@
   </span>
 
   <h1>Créer un nouvel article</h1>
-  <form action="">
+  <form (ngSubmit)="submit()" [formGroup]="form">
     <mat-form-field>
       <mat-label>Sélectionner un thème</mat-label>
-      <mat-select>
+      <mat-select formControlName="topicId">
         <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Titre de l'article</mat-label>
-      <input type="text" matInput>
+      <input matInput type="text" formControlName="title">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Contenu de l'article</mat-label>
-      <textarea matInput></textarea>
+      <textarea matInput formControlName="content"></textarea>
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary" routerLink="login">Créer</button>
+    <button mat-raised-button type="submit" color="primary">Créer</button>
   </form>
 </div>

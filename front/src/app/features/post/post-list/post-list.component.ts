@@ -15,5 +15,4 @@ export class PostListComponent {
 
   constructor(private postService: PostService) { }
 
-
 }
