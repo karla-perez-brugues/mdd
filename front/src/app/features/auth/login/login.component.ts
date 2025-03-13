@@ -5,6 +5,7 @@ import {SessionInformation} from "../../../core/interfaces/sessionInformation.in
 import {SessionService} from "../../../core/services/session.service";
 import {Router} from "@angular/router";
 import {LoginRequest} from "../../../core/interfaces/loginRequest.interface";
+import {User} from "../../../core/models/user.model";
 
 @Component({
   selector: 'app-login',
@@ -31,8 +32,14 @@ export class LoginComponent {
 
     this.authService.login(loginRequest).subscribe({
       next: (response: SessionInformation) => {
-        this.sessionService.logIn(response);
-        this.router.navigate(['/posts']);
+        localStorage.setItem('token', response.token);
+        this.authService.me().subscribe({
+          next: (user: User) => {
+            this.sessionService.logIn(user);
+            this.router.navigate(['/posts']);
+          },
+          error: error => this.onError = true,
+        });
       },
       error: error => this.onError = true,
     });

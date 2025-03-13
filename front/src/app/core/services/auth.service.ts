@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {RegisterRequest} from "../interfaces/registerRequest.interface";
 import {LoginRequest} from "../interfaces/loginRequest.interface";
 import {SessionInformation} from "../interfaces/sessionInformation.interface";
+import {User} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class AuthService {
 
   public login(loginRequest: LoginRequest): Observable<SessionInformation> {
     return this.httpClient.post<SessionInformation>(`${this.pathService}/login`, loginRequest);
+  }
+
+  public me(): Observable<User> {
+    return this.httpClient.get<User>(`${this.pathService}/me`);
   }
 }

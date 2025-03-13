@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {SessionInformation} from "../interfaces/sessionInformation.interface";
 import {BehaviorSubject, Observable} from "rxjs";
+import {User} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class SessionService {
 
   public isLogged = false;
-  public sessionInformation: SessionInformation | undefined;
+  public user: User | undefined;
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
@@ -16,14 +16,15 @@ export class SessionService {
     return this.isLoggedSubject.asObservable();
   }
 
-  public logIn(user: SessionInformation): void {
-    this.sessionInformation = user;
+  public logIn(user: User): void {
+    this.user = user;
     this.isLogged = true;
     this.next();
   }
 
   public logOut(): void {
-    this.sessionInformation = undefined;
+    localStorage.removeItem('token');
+    this.user = undefined;
     this.isLogged = false;
     this.next();
   }
