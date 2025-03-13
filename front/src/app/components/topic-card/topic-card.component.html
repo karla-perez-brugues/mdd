@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-title>{{ topic.title }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ topic.description }}</p>
+    <button *ngIf="!isSubscribed" mat-raised-button color="primary">S'abonner</button>
+    <button *ngIf="isSubscribed" mat-raised-button>Se désabonner</button>
+  </mat-card-content>
+</mat-card>

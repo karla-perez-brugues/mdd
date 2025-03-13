@@ -29,7 +29,7 @@ public class SpringSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
+        return username -> userRepository.findByEmailOrUsername(username)
                 .orElseThrow(NotFoundException::new);
     }
 

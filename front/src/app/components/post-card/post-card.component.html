@@ -1,0 +1,12 @@
+<mat-card (click)="onViewPost()">
+  <mat-card-title>{{ post.title }}</mat-card-title>
+  <mat-card-content>
+    <table class="post-info">
+      <tr>
+        <td>{{ post.createdAt | date: 'dd/MM/YYYY' }}</td>
+        <td>{{ post.author }}</td>
+      </tr>
+    </table>
+    <p>{{ post.content }}</p>
+  </mat-card-content>
+</mat-card>

@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -47,7 +45,6 @@ public class PostDto {
         this.content = content;
     }
 
-    @JsonProperty("topic_id")
     public Long getTopicId() {
         return topicId;
     }
@@ -56,7 +53,6 @@ public class PostDto {
         this.topicId = topicId;
     }
 
-    @JsonProperty("created_at")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -65,7 +61,6 @@ public class PostDto {
         this.createdAt = createdAt;
     }
 
-    @JsonProperty("updated_at")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
