@@ -23,7 +23,7 @@ public class UserService {
         return userRepository.findByEmail(email).orElse(null);
     }
 
-    public void addSubscription(Long topicId, String username) {
+    public Topic addSubscription(Long topicId, String username) {
         Topic topic = topicRepository.findById(topicId).orElse(null);
         User user = userRepository.findByUsername(username).orElse(null);
 
@@ -37,9 +37,11 @@ public class UserService {
         } // TODO: else throw error
 
         userRepository.save(user);
+
+        return topic;
     }
 
-    public void deleteSubscription(Long topicId, String username) {
+    public Topic deleteSubscription(Long topicId, String username) {
         Topic topic = topicRepository.findById(topicId).orElse(null);
         User user = userRepository.findByUsername(username).orElse(null);
 
@@ -53,5 +55,7 @@ public class UserService {
         } // TODO: else throw error
 
         userRepository.save(user);
+
+        return topic;
     }
 }

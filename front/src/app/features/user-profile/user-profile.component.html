@@ -20,10 +20,14 @@
     <button type="submit" mat-raised-button color="primary" routerLink="login">Sauvegarder</button>
   </form>
 
+  <!-- FIXME: le divider ne s'affiche pas -->
   <mat-divider></mat-divider>
 
-  <h1>Abonnements</h1>
+  <!-- FIXME: cette ligne me fait une erreur à la compilation -->
+  <h1> <!-- *ngIf="(topics$ | async)?.length > 0"-->
+    Abonnements
+  </h1>
   <div class="subscriptions">
-    <app-topic-card *ngFor="let topic of topics" [topic]="topic"></app-topic-card>
+    <app-topic-card *ngFor="let topic of topics$ | async" [topic]="topic"></app-topic-card>
   </div>
 </div>

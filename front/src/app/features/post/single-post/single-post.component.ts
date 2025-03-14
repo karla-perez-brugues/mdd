@@ -4,6 +4,7 @@ import {Topic} from "../../../core/models/topic.model";
 import {Comment} from "../../../core/models/comment.model";
 import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../../core/services/post.service";
+import {TopicService} from "../../../core/services/topic.service";
 
 @Component({
   selector: 'app-single-post',
@@ -12,7 +13,7 @@ import {PostService} from "../../../core/services/post.service";
 })
 export class SinglePostComponent implements OnInit {
   public post: Post | undefined;
-  public topic: Topic | undefined; // TODO: fetch topic
+  public topic: Topic | undefined;
   public comments: Comment[] | undefined; // TODO: fetch comments
 
   public postId: string;
@@ -20,6 +21,7 @@ export class SinglePostComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
+    private topicService: TopicService,
   ) {
     this.postId = this.route.snapshot.params['id'];
   }
@@ -33,6 +35,11 @@ export class SinglePostComponent implements OnInit {
       .getPostById(this.postId)
       .subscribe(post => {
         this.post = post;
+        this.topicService
+          .getById(post.topicId)
+          .subscribe(topic => {
+            this.topic = topic;
+          })
       });
   }
 }

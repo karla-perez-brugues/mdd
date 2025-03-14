@@ -5,6 +5,6 @@
   </div>
 
   <div class="topics">
-    <app-topic-card *ngFor="let topic of topics" [topic]="topic"></app-topic-card>
+    <app-topic-card *ngFor="let topic of topics$ | async" [topic]="topic"></app-topic-card>
   </div>
 </div>
