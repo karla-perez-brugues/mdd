@@ -5,6 +5,8 @@ import {Comment} from "../../../core/models/comment.model";
 import {ActivatedRoute} from "@angular/router";
 import {PostService} from "../../../core/services/post.service";
 import {TopicService} from "../../../core/services/topic.service";
+import {CommentService} from "../../../core/services/comment.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-single-post',
@@ -14,20 +16,37 @@ import {TopicService} from "../../../core/services/topic.service";
 export class SinglePostComponent implements OnInit {
   public post: Post | undefined;
   public topic: Topic | undefined;
-  public comments: Comment[] | undefined; // TODO: fetch comments
+  public comments: Comment[] | undefined;
 
   public postId: string;
+
+  public commentForm: FormGroup = this.fb.group({
+    content: ['', [Validators.required]],
+  })
 
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
     private topicService: TopicService,
+    private commentService: CommentService,
+    private fb: FormBuilder,
   ) {
     this.postId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
     this.fetchPost()
+  }
+
+  public submit(): void {
+    const commentRequest: Comment = this.commentForm.value as Comment;
+
+    this.commentService
+      .create(this.postId, commentRequest)
+      .subscribe(comment => {
+        this.comments?.push(comment);
+        this.commentForm.reset();
+      })
   }
 
   private fetchPost(): void {
@@ -39,7 +58,14 @@ export class SinglePostComponent implements OnInit {
           .getById(post.topicId)
           .subscribe(topic => {
             this.topic = topic;
+          }
+        );
+        this.commentService
+          .getCommentsByPostId(this.postId)
+          .subscribe(comments => {
+            this.comments = comments;
           })
-      });
+      }
+    );
   }
 }

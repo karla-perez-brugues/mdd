@@ -11,6 +11,8 @@ public class CommentDto {
     @NotNull
     private String content;
 
+    private String author;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -31,6 +33,14 @@ public class CommentDto {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @JsonProperty("created_at")

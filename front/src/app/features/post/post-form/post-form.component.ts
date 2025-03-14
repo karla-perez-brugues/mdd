@@ -33,7 +33,6 @@ export class PostFormComponent implements OnInit {
 
   public submit(): void {
     const post = this.form.value as Post;
-    console.log(post);
 
     this.postService
       .createPost(post)
