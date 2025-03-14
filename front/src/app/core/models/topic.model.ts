@@ -1,6 +1,6 @@
 export interface Topic {
-  id: number;
+  id: string;
   title: string;
   description: string;
-  subscribers: number[];
+  subscribed: boolean;
 }
