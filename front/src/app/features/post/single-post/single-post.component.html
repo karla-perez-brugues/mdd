@@ -24,9 +24,9 @@
   </div>
 
   <div class="comment">
-    <form>
+    <form (ngSubmit)="submit()" [formGroup]="commentForm">
       <mat-form-field>
-        <textarea matInput placeholder="Écrivez ici votre commentaire"></textarea>
+        <textarea matInput placeholder="Écrivez ici votre commentaire" formControlName="content"></textarea>
       </mat-form-field>
       <button mat-button type="submit">
         <mat-icon>send</mat-icon>
