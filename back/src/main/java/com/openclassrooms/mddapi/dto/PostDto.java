@@ -15,6 +15,8 @@ public class PostDto {
     @NotNull
     private Long topicId;
 
+    private String author;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -51,6 +53,14 @@ public class PostDto {
 
     public void setTopicId(Long topicId) {
         this.topicId = topicId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.controller;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.service.PostService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +17,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping("")
-    public ResponseEntity<?> getAllPosts(Principal principal) {
+    public ResponseEntity<List<PostDto>> getAllPosts(Principal principal) {
         List<Post> postList = postService.getUserFeed(principal.getName());
-        List<PostDto> postDtoList = postList.stream().map(post -> modelMapper.map(post, PostDto.class)).toList();
+        List<PostDto> postDtoList = postList.stream().map(post -> postService.entityToDto(post)).toList();
 
         return ResponseEntity.ok(postDtoList);
     }
@@ -32,7 +28,7 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable("id") String id) {
         Post post = postService.getById(Long.valueOf(id));
-        PostDto postDto = modelMapper.map(post, PostDto.class);
+        PostDto postDto = postService.entityToDto(post);
 
         return ResponseEntity.ok(postDto);
     }

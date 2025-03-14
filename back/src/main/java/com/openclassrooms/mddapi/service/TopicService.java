@@ -45,7 +45,6 @@ public class TopicService {
         TopicDto topicDto = modelMapper.map(topic, TopicDto.class);
 
         if (user != null && user.getTopics().contains(topic)) {
-            System.out.println("TOPIC IS SUBSCRIBED");
             topicDto.setSubscribed(true);
         }
 

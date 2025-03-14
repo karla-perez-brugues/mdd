@@ -56,4 +56,11 @@ public class PostService {
 
         return posts;
     }
+
+    public PostDto entityToDto(Post post) {
+        PostDto postDto = modelMapper.map(post, PostDto.class);
+        postDto.setAuthor(post.getAuthor().getUsername());
+
+        return postDto;
+    }
 }
