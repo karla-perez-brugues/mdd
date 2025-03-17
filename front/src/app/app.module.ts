@@ -26,6 +26,7 @@ import { UserProfileComponent } from './features/user-profile/user-profile.compo
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "../interceptors/jwt.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, RegisterComponent, PostListComponent, PostCardComponent, SinglePostComponent, CommentComponent, TopicCardComponent, TopicListComponent, PostFormComponent, UserProfileComponent],
@@ -44,6 +45,7 @@ import {JwtInterceptor} from "../interceptors/jwt.interceptor";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent],

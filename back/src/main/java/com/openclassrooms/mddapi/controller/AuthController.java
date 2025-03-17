@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.controller;
 import javax.validation.Valid;
 
 import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.exception.BadRequestException;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.SignupRequest;
@@ -90,10 +91,14 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<UserDto> me(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        UserDto userDto = modelMapper.map(user, UserDto.class);
+        try {
+            User user = (User) authentication.getPrincipal();
+            UserDto userDto = modelMapper.map(user, UserDto.class);
 
-        return ResponseEntity.ok(userDto);
+            return ResponseEntity.ok(userDto);
+        } catch (Exception e) {
+            throw new BadRequestException();
+        }
     }
 
 }
