@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
@@ -21,6 +22,20 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
+    }
+
+    public void update(UserDto userDto, User user) {
+        if (userDto.getUsername() != null && !userDto.getUsername().isEmpty()) {
+            user.setUsername(userDto.getUsername());
+        }
+        if (userDto.getEmail() != null && !userDto.getEmail().isEmpty()) {
+            user.setEmail(userDto.getEmail());
+        }
+        if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+            user.setPassword(userDto.getPassword());
+        }
+
+        userRepository.save(user);
     }
 
     public Topic addSubscription(Long topicId, String username) {

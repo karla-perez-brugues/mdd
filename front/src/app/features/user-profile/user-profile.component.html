@@ -1,23 +1,23 @@
 <app-header></app-header>
 <div class="container">
   <h1>Profil utilisateur</h1>
-  <form action="">
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field>
-      <mat-label>Nom d'utilisateur</mat-label>
-      <input type="text" matInput>
+      <mat-label>{{user.username}}</mat-label>
+      <input matInput type="text" formControlName="username" placeholder="Nouveau nom d'utilisateur">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Adresse e-mail</mat-label>
-      <input type="email" matInput>
+      <mat-label>{{user.email}}</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Nouvelle adresse e-mail">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
-      <input type="password" matInput>
+      <input matInput type="password" formControlName="password">
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary" routerLink="login">Sauvegarder</button>
+    <button mat-raised-button type="submit" color="primary">Sauvegarder</button>
   </form>
 
   <!-- FIXME: le divider ne s'affiche pas -->
