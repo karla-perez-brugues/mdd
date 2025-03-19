@@ -7,7 +7,7 @@ import {User} from "../models/user.model";
 })
 export class SessionService {
 
-  public isLogged = false;
+  public isLogged = localStorage.getItem('token') !== null;
   public user: User | undefined;
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
