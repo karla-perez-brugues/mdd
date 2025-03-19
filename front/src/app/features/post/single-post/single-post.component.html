@@ -1,11 +1,12 @@
 <app-header></app-header>
 <div class="container">
-<!--  <div class="back">-->
-
-<!--  </div>-->
-
   <div *ngIf="post" class="post">
-    <h1>{{ post.title }}</h1>
+    <div class="title-line">
+      <button mat-button (click)="back()" class="back">
+        <mat-icon>west</mat-icon>
+      </button>
+      <h1>{{ post.title }}</h1>
+    </div>
     <table class="post-info">
       <tr>
         <td>{{ post.createdAt | date: 'dd/MM/YYYY' }}</td>
@@ -28,7 +29,7 @@
       <mat-form-field>
         <textarea matInput placeholder="Écrivez ici votre commentaire" formControlName="content"></textarea>
       </mat-form-field>
-      <button mat-button type="submit">
+      <button mat-button type="submit" [disabled]="!commentForm.valid">
         <mat-icon>send</mat-icon>
       </button>
     </form>

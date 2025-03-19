@@ -1,10 +1,12 @@
 <app-header></app-header>
 <div class="container">
-  <span>
-    <mat-icon>west</mat-icon>
-  </span>
+  <div class="title-line">
+    <button mat-button (click)="back()" class="back">
+      <mat-icon>west</mat-icon>
+    </button>
+    <h1>Créer un nouvel article</h1>
+  </div>
 
-  <h1>Créer un nouvel article</h1>
   <form (ngSubmit)="submit()" [formGroup]="form">
     <mat-form-field>
       <mat-label>Sélectionner un thème</mat-label>
@@ -23,6 +25,6 @@
       <textarea matInput formControlName="content"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button type="submit" color="primary">Créer</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Créer</button>
   </form>
 </div>
