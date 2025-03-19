@@ -11,23 +11,23 @@ import {map, Observable} from "rxjs";
 export class PostListComponent {
   public posts$: Observable<Post[]> = this.postService.getAllPosts();
 
-  public sortByDesc = true;
+  public direction: string = 'north';
 
   constructor(private postService: PostService) {}
 
-  public sort() {
+  public sort(direction: string) {
     this.posts$ = this.posts$.pipe(map((posts) => {
         posts.sort((a, b) => {
-          if (this.sortByDesc) {
+          if (direction === 'north') {
+            this.direction = 'south';
             return a.updatedAt > b.updatedAt ? 1 : -1;
           } else {
+            this.direction = 'north';
             return a.updatedAt < b.updatedAt ? 1 : -1;
           }
         });
         return posts;
       })
     );
-
-    this.sortByDesc = !this.sortByDesc;
   }
 }
