@@ -17,7 +17,7 @@ export class LoginComponent {
 
   public form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['',  [Validators.required, Validators.min(3)]]
+    password: ['',  [Validators.required, Validators.min(8)]]
   });
 
   constructor(
@@ -30,19 +30,21 @@ export class LoginComponent {
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
 
-    this.authService.login(loginRequest).subscribe({
-      next: (response: SessionInformation) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me().subscribe({
-          next: (user: User) => {
-            this.sessionService.logIn(user);
-            this.router.navigate(['/posts']);
-          },
-          error: error => this.onError = true,
-        });
-      },
-      error: error => this.onError = true,
-    });
+    if (this.form.valid) {
+      this.authService.login(loginRequest).subscribe({
+        next: (response: SessionInformation) => {
+          localStorage.setItem('token', response.token);
+          this.authService.me().subscribe({
+            next: (user: User) => {
+              this.sessionService.logIn(user);
+              this.router.navigate(['/posts']);
+            },
+            error: error => this.onError = true,
+          });
+        },
+        error: error => this.onError = true,
+      });
+    }
   }
 
 }

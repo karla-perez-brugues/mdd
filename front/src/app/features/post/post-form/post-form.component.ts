@@ -34,10 +34,16 @@ export class PostFormComponent implements OnInit {
   public submit(): void {
     const post = this.form.value as Post;
 
-    this.postService
-      .createPost(post)
-      .subscribe((_: Post) => {
-        this.router.navigate(['/posts']);
-      })
+    if (this.form.valid) {
+      this.postService
+        .createPost(post)
+        .subscribe((_: Post) => {
+          this.router.navigate(['/posts']);
+        })
+    }
+  }
+
+  public back(): void {
+    window.history.back();
   }
 }

@@ -11,13 +11,13 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  private strongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/; // FIXME
+  private strongPasswordRegx: string = '^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=.*[0-9])(?=.*[!$%@#£€*?&])[a-zA-Z0-9!$%@#£€*?&]{8,40}$';
   public onError = false;
 
   public form = this.fb.group({
     username: ['', Validators.required],
     email: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.pattern(this.strongPasswordRegx)]],
   });
 
   constructor(
@@ -30,15 +30,17 @@ export class RegisterComponent {
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
 
-    this.authService
-      .register(registerRequest)
-      .subscribe({
-        next: () => {
-          this.matSnackBar.open('Compte créé avec succes !', 'Fermer', { duration: 3000 });
-          this.router.navigateByUrl('/login');
-        },
-        error: error =>  this.onError = true,
-      })
+    if (this.form.valid) {
+      this.authService
+        .register(registerRequest)
+        .subscribe({
+          next: () => {
+            this.matSnackBar.open('Compte créé avec succes !', 'Fermer', { duration: 3000 });
+            this.router.navigateByUrl('/login');
+          },
+          error: error =>  this.onError = true,
+        });
+    }
   }
 
 }

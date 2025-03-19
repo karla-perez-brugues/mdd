@@ -46,15 +46,17 @@ export class UserProfileComponent implements OnInit {
   public submit(): void {
     const user = this.form.value as User;
 
-    this.userService
-      .update(user)
-      .subscribe({
-        next: () => {
-          this.sessionService.logOut();
-          this.matSnackBar.open('Compte mis à jour avec succès !', 'Fermer', { duration: 3000 });
-          this.router.navigateByUrl('/login');
-        }
-      })
+    if (this.form.valid) {
+      this.userService
+        .update(user)
+        .subscribe({
+          next: () => {
+            this.sessionService.logOut();
+            this.matSnackBar.open('Compte mis à jour avec succès !', 'Fermer', { duration: 3000 });
+            this.router.navigateByUrl('/login');
+          }
+        })
+    }
   }
 
 }

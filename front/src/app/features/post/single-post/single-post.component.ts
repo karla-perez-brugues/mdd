@@ -21,7 +21,7 @@ export class SinglePostComponent implements OnInit {
   public postId: string;
 
   public commentForm: FormGroup = this.fb.group({
-    content: ['', [Validators.required]],
+    content: ['', [Validators.required, Validators.min(1)]],
   })
 
   constructor(
@@ -41,12 +41,18 @@ export class SinglePostComponent implements OnInit {
   public submit(): void {
     const commentRequest: Comment = this.commentForm.value as Comment;
 
-    this.commentService
-      .create(this.postId, commentRequest)
-      .subscribe(comment => {
-        this.comments?.push(comment);
-        this.commentForm.reset();
-      })
+    if (this.commentForm.valid) {
+      this.commentService
+        .create(this.postId, commentRequest)
+        .subscribe(comment => {
+          this.comments?.push(comment);
+          this.commentForm.reset();
+        });
+    }
+  }
+
+  public back(): void {
+    window.history.back();
   }
 
   private fetchPost(): void {
