@@ -19,6 +19,7 @@ public class Post {
     private String title;
 
     @NotNull
+    @Column(columnDefinition="TEXT")
     private String content;
 
     @ManyToOne

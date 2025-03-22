@@ -1,0 +1,27 @@
+.container {
+  padding: 50px;
+}
+
+.management {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+@media (max-width: 600px) {
+  .management button {
+    width: 100%;
+  }
+
+  .posts {
+    justify-content: center;
+  }
+}

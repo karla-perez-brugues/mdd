@@ -14,6 +14,8 @@ public class TopicDto {
     @NotNull
     private String description;
 
+    private boolean isSubscribed;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -42,6 +44,14 @@ public class TopicDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
     }
 
     @JsonProperty("created_at")

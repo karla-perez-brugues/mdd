@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  margin: auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+
+mat-card {
+  max-width: 400px;
+  background: #F5F5F5 !important;
+  box-shadow: none !important;
+  border-radius: 8px;
+}
+
+.topics, .subscriptions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 50px;
+}
+
+.post-info {
+  margin-bottom: 10px;
+}

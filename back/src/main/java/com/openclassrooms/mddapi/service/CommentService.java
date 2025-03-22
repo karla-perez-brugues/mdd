@@ -28,7 +28,7 @@ public class CommentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void create(CommentDto commentDto, Long postId, String username) {
+    public Comment create(CommentDto commentDto, Long postId, String username) {
         Post post = postRepository.findById(postId).orElseThrow();
         User user = userRepository.findByUsername(username).orElseThrow();
 
@@ -36,13 +36,20 @@ public class CommentService {
         comment.setPost(post);
         comment.setAuthor(user);
 
-        commentRepository.save(comment);
+        return commentRepository.save(comment);
     }
 
     public List<Comment> findAllByPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow();
 
         return post.getComments();
+    }
+
+    public CommentDto entityToDto(Comment comment) {
+        CommentDto commentDto = modelMapper.map(comment, CommentDto.class);
+        commentDto.setAuthor(comment.getAuthor().getUsername());
+
+        return commentDto;
     }
 
 }

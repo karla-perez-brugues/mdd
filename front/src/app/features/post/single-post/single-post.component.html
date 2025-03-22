@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="container">
+  <div *ngIf="post" class="post">
+    <div class="title-line">
+      <button mat-button (click)="back()" class="back">
+        <mat-icon>west</mat-icon>
+      </button>
+      <h1>{{ post.title }}</h1>
+    </div>
+    <table class="post-info">
+      <tr>
+        <td>{{ post.createdAt | date: 'dd/MM/YYYY' }}</td>
+        <td>{{ post.author }}</td>
+        <td *ngIf="topic">{{ topic.title }}</td>
+      </tr>
+    </table>
+    <p>{{ post.content }}</p>
+  </div>
+
+<!--  <mat-divider></mat-divider>-->
+
+  <div class="comments">
+    <h2>Commentaires</h2>
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+  </div>
+
+  <div class="comment">
+    <form (ngSubmit)="submit()" [formGroup]="commentForm">
+      <mat-form-field>
+        <textarea matInput placeholder="Écrivez ici votre commentaire" formControlName="content"></textarea>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!commentForm.valid">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<mat-toolbar>
+<!--  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">-->
+<!--    <mat-icon>menu</mat-icon>-->
+<!--  </button>-->
+  <a routerLink="">
+    <img src="/assets/logo_p6.png" alt="logo" height="50"/>
+  </a>
+  <span class="spacer"></span>
+  <div *ngIf="$isLogged() | async">
+    <a mat-button (click)="logout()" color="warn">Se déconnecter</a>
+    <a mat-button routerLink="/posts">Articles</a>
+    <a mat-button routerLink="/topics">Thèmes</a>
+    <a mat-button routerLink="/account">
+      <mat-icon aria-hidden="false" aria-label="account" fontIcon="account_circle"></mat-icon>
+    </a>
+  </div>
+</mat-toolbar>

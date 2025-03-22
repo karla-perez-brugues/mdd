@@ -1,0 +1,13 @@
+.container {
+  padding: 50px;
+}
+
+@media (max-width: 600px) {
+  .management button {
+    width: 100%;
+  }
+
+  .topics {
+    justify-content: center;
+  }
+}
