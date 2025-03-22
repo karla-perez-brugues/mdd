@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/topic")
-public class TopicController { // TODO: add try catches
+public class TopicController {
 
     @Autowired
     private TopicService topicService;

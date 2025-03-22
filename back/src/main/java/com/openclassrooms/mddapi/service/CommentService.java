@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.CommentDto;
+import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
@@ -29,8 +30,8 @@ public class CommentService {
     private ModelMapper modelMapper;
 
     public Comment create(CommentDto commentDto, Long postId, String username) {
-        Post post = postRepository.findById(postId).orElseThrow();
-        User user = userRepository.findByUsername(username).orElseThrow();
+        Post post = postRepository.findById(postId).orElseThrow(NotFoundException::new);
+        User user = userRepository.findByUsername(username).orElseThrow(NotFoundException::new);
 
         Comment comment = modelMapper.map(commentDto, Comment.class);
         comment.setPost(post);
@@ -40,7 +41,7 @@ public class CommentService {
     }
 
     public List<Comment> findAllByPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
+        Post post = postRepository.findById(postId).orElseThrow(NotFoundException::new);
 
         return post.getComments();
     }

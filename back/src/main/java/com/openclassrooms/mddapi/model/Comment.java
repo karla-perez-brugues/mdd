@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,6 +16,8 @@ public class Comment {
     private Long id;
 
     @NotNull
+    @Size(min = 1)
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne

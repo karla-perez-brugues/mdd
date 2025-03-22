@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
@@ -29,8 +30,8 @@ public class PostService {
     private ModelMapper modelMapper;
 
     public void createPost(PostDto postDto, String username) {
-        User author = userRepository.findByUsername(username).orElseThrow();
-        Topic topic = topicRepository.findById(postDto.getTopicId()).orElseThrow();
+        User author = userRepository.findByUsername(username).orElseThrow(NotFoundException::new);
+        Topic topic = topicRepository.findById(postDto.getTopicId()).orElseThrow(NotFoundException::new);
 
         Post post = modelMapper.map(postDto, Post.class);
         post.setAuthor(author);
@@ -40,11 +41,11 @@ public class PostService {
     }
 
     public Post getById(Long id) {
-        return postRepository.findById(id).orElseThrow();
+        return postRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public List<Post> getUserFeed(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow();
+        User user = userRepository.findByUsername(username).orElseThrow(NotFoundException::new);
         List<Topic> subscribedTopics = user.getTopics();
         List<Post> posts = new ArrayList<>();
 

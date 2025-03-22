@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class PostController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> createPost(@RequestBody PostDto postDto, Principal principal) {
+    public ResponseEntity<?> createPost(@Valid @RequestBody PostDto postDto, Principal principal) {
         postService.createPost(postDto, principal.getName());
 
         return ResponseEntity.ok().build();

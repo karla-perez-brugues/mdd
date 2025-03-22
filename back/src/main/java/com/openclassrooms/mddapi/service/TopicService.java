@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.exception.NotFoundException;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.TopicRepository;
@@ -28,23 +29,20 @@ public class TopicService {
     }
 
     public Topic getTopicById(Long id) {
-        return topicRepository.findById(id).orElse(null);
+        return topicRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public List<Topic> findSubscribedTopicsByUser(String username) {
-        User user = userRepository.findByUsername(username).orElse(null);
-
-        // TODO: throw error
-        assert user != null;
+        User user = userRepository.findByUsername(username).orElseThrow(NotFoundException::new);
 
         return user.getTopics();
     }
 
     public TopicDto entityToDto(Topic topic, String username) {
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findByUsername(username).orElseThrow(NotFoundException::new);
         TopicDto topicDto = modelMapper.map(topic, TopicDto.class);
 
-        if (user != null && user.getTopics().contains(topic)) {
+        if (user.getTopics().contains(topic)) {
             topicDto.setSubscribed(true);
         }
 

@@ -19,6 +19,7 @@ public class Topic {
     private String title;
 
     @NotNull
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "topic")

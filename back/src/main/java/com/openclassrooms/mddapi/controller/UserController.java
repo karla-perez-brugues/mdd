@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
     private UserService userService;
 
     @PutMapping("/update")
-    public ResponseEntity<MessageResponse> update(@RequestBody UserDto userDto, Authentication authentication) {
+    public ResponseEntity<MessageResponse> update(@Valid @RequestBody UserDto userDto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         this.userService.update(userDto, user);
 

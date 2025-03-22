@@ -9,7 +9,6 @@ import com.openclassrooms.mddapi.payload.request.LoginRequest;
 import com.openclassrooms.mddapi.payload.request.SignupRequest;
 import com.openclassrooms.mddapi.payload.response.JwtResponse;
 import com.openclassrooms.mddapi.payload.response.MessageResponse;
-import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.JwtUtils;
 import com.openclassrooms.mddapi.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -19,10 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -34,12 +30,6 @@ public class AuthController {
 
     @Autowired
     private JwtUtils jwtUtils;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -66,27 +56,22 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
+        if (userService.findByEmail(signUpRequest.getEmail()) != null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+                    .body(new MessageResponse("Erreur: Cet email est déjà pris !"));
         }
 
-        if (userRepository.findByUsername(signUpRequest.getUsername()).isPresent()) {
+        if (userService.findByUsername(signUpRequest.getUsername()) != null) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Erreur: Ce nom d'utilisateur est déjà pris !"));
         }
 
         // Create new user's account
-        User user = new User();
-        user.setEmail(signUpRequest.getEmail());
-        user.setUsername(signUpRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        userService.create(signUpRequest);
 
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Compte créé avec succès !"));
     }
 
     @GetMapping("/me")
