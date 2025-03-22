@@ -12,6 +12,16 @@
 .posts {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 50px;
+}
+
+@media (max-width: 600px) {
+  .management button {
+    width: 100%;
+  }
+
+  .posts {
+    justify-content: center;
+  }
 }

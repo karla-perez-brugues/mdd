@@ -3,6 +3,6 @@
   <mat-card-content>
     <p>{{ topic.description }}</p>
     <button *ngIf="!topic.subscribed" mat-raised-button color="primary" (click)="subscribe()">S'abonner</button>
-    <button *ngIf="topic.subscribed" mat-raised-button (click)="unsubscribe()">Se désabonner</button>
+    <button *ngIf="topic.subscribed" mat-raised-button (click)="unsubscribe()" class="{{buttonClass}}">{{unsubscribeButtonLabel}}</button>
   </mat-card-content>
 </mat-card>

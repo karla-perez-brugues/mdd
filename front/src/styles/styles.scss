@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 mat-card {
-  max-width: 600px;
+  max-width: 400px;
   background: #F5F5F5 !important;
   box-shadow: none !important;
   border-radius: 8px;
@@ -21,4 +21,8 @@ mat-card {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 50px;
+}
+
+.post-info {
+  margin-bottom: 10px;
 }

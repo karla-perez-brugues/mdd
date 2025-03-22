@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Topic} from "../../core/models/topic.model";
 import {TopicService} from "../../core/services/topic.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-topic-card',
@@ -10,9 +11,23 @@ import {TopicService} from "../../core/services/topic.service";
 export class TopicCardComponent implements OnInit {
   @Input() topic!: Topic;
 
-  constructor(private topicService: TopicService) {}
+  public unsubscribeButtonLabel!: string;
+  public buttonClass!: string;
+
+  constructor(
+    private topicService: TopicService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
+    const url = this.router.url;
+    if (url.includes('account')) {
+      this.unsubscribeButtonLabel = 'Se désabonner';
+      this.buttonClass = 'account';
+    } else {
+      this.unsubscribeButtonLabel = 'Déjà abonné';
+      this.buttonClass = 'topic-list';
+    }
   }
 
   public subscribe(): void {
