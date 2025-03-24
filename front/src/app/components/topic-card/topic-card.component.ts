@@ -13,6 +13,7 @@ export class TopicCardComponent implements OnInit {
 
   public unsubscribeButtonLabel!: string;
   public buttonClass!: string;
+  public isTopicList: boolean = false;
 
   constructor(
     private topicService: TopicService,
@@ -27,6 +28,7 @@ export class TopicCardComponent implements OnInit {
     } else {
       this.unsubscribeButtonLabel = 'Déjà abonné';
       this.buttonClass = 'topic-list';
+      this.isTopicList = true;
     }
   }
 
