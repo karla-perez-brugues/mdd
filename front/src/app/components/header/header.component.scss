@@ -6,3 +6,17 @@ mat-toolbar {
 .spacer {
   flex: 1 1 auto;
 }
+
+.burger-button {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .nav-links {
+    display: none;
+  }
+
+  .burger-button {
+    display: block;
+  }
+}

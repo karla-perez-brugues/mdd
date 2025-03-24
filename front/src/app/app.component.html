@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container *ngIf="isMenuOpen">
+  <mat-sidenav mode="side" position="end" opened>
+    <mat-list>
+      <mat-list-item>
+        <button mat-button (click)="closeMenu()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button color="warn" (click)="logout()">Se déconnecter</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button routerLink="/posts">Articles</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button routerLink="/topics">Thèmes</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button routerLink="/account">
+          <mat-icon aria-hidden="false" aria-label="account" fontIcon="account_circle"></mat-icon>
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<router-outlet *ngIf="!isMenuOpen"></router-outlet>
