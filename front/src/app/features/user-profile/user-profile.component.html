@@ -20,14 +20,13 @@
     <button mat-raised-button type="submit" color="primary">Sauvegarder</button>
   </form>
 
-  <!-- FIXME: le divider ne s'affiche pas -->
-  <mat-divider></mat-divider>
-
-  <!-- FIXME: cette ligne me fait une erreur à la compilation -->
-  <h1> <!-- *ngIf="(topics$ | async)?.length > 0"-->
-    Abonnements
-  </h1>
-  <div class="subscriptions">
-    <app-topic-card *ngFor="let topic of topics$ | async" [topic]="topic"></app-topic-card>
+  <div *ngIf="topics.length > 0" class="subscriptions-container">
+    <mat-divider></mat-divider>
+    <h1>
+      Abonnements
+    </h1>
+    <div class="subscriptions">
+      <app-topic-card *ngFor="let topic of topics" [topic]="topic"></app-topic-card>
+    </div>
   </div>
 </div>

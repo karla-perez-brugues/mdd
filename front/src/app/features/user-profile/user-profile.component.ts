@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  public topics$: Observable<Topic[]> = this.topicService.getSubscribedTopicsByUser();
+  public topics!: Topic[];
   public user!: User;
 
   public form = this.fb.group({
@@ -40,6 +40,11 @@ export class UserProfileComponent implements OnInit {
       next: user => {
         this.user = user;
       }
+    });
+
+    this.topicService.getSubscribedTopicsByUser()
+    .subscribe(topics => {
+      this.topics = topics;
     })
   }
 
