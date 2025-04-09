@@ -1,25 +1,70 @@
-# P6-Full-Stack-reseau-dev
+# Monde de Dév
+
+This application is a social network intended for developers where they have a dashboard with articles in connection with the topics they subscribed to.
+They can read and post articles but also comment them.
+
+## Back
+
+Make sure Java is installed and check the version with `java -version`. This application requires Java 11.
+
+### Data base
+
+Make sure mysql is installed with `mysql -V`.  
+Create a new database named `mdd`.  
+Then, at the root of the project, create a file named `.env` with these properties and fill them according to your configuration :
+- `SPRING_DATASOURCE_URL`
+- `SPRING_DATASOURCE_USERNAME`
+- `SPRING_DATASOURCE_PASSWORD`
+- `JWT_SECRET`
+- `JWT_EXPIRATION`
+
+The different tables will be created automatically when the development server is started.
+
+### Start the API
+
+Go inside the backend folder
+> cd mdd/back
+
+Install dependencies
+> mvn clean install
+
+Start backend
+> mvn spring-boot:run
+
+The API is running on `http://localhost:3001`.
 
 ## Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
-Don't forget to install your node_modules before starting (`npm install`).
+### Start the application
 
-### Development server
+Go inside the frontend folder
+> cd mdd/front
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Install dependencies
+> npm install
 
-### Build
+Start frontend
+> ng serve
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Navigate to `http://localhost:4200/`.
 
-### Where to start
+## Dependencies
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+### Back
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+- Spring Web
+- Spring Data JPA
+- MySQL Driver
+- Spring Security
+- Spring Validation
+- JWT
+- Model Mapper
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get rid of it.
+### Front
 
-Good luck!
+- RxJS
+- Angular Router
+- Angular Forms
+- Angular Material
